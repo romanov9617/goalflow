@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: pglease-postgres
+    restart: unless-stopped
+    env_file:
+      - ./deploy/docker/postgres.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pglease"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: pglease-pgadmin
+    restart: unless-stopped
+    env_file:
+      - ./deploy/docker/pgadmin.env
+    ports:
+      - "8080:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  pg_data:
+  pgadmin_data:
+
