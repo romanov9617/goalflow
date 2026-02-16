@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "pglease/internal/di"
 
 func main() {
-	fmt.Println("Hello world")
+	di.CreateApp().Run()
 }

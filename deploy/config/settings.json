@@ -1,0 +1,13 @@
+{
+  "api": {
+    "host": "localhost",
+    "port": 8001
+  },
+  "postgres": {
+    "username": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "database": "pglease",
+    "ssl_mode": "disable"
+  }
+}
